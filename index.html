@@ -1,0 +1,1550 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FORTEX Seguridad Inteligente</title>
+<meta name="description" content="Cámaras 1080p hechas en Mazatlán, cerraduras biométricas con IA y nube con acceso desde tu smartphone. Monitoreo 24/7.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: noche de vigilancia arriba (hero y cierre oscuros, como portada de FORTEX), día claro en medio para producto y precios. Un solo look de marca. */
+:root{
+  --noche:#05070D;      /* negro de portada */
+  --marino:#14213A;     /* azul marino corporativo */
+  --pizarra:#3D4A63;    /* gris corporativo */
+  --claro:#EEF2F8;      /* fondo claro */
+  --blanco:#FFFFFF;
+  --azul:#1D4ED8;       /* azul de acción */
+  --azul-hover:#1E40AF;
+  --celeste:#A9C1FF;    /* azul claro */
+  --brillo:#3B8BFF;     /* brillo del logo */
+  --ambar:#E0A100;
+  --verde:#2E7D6B;
+  --rojo:#C7485C;
+  --linea:#D5DDEA;
+  --tinta:#0E1729;
+  --tinta-2:#4A5770;
+  --font-display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --max:1180px;
+  --r:10px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--claro);color:var(--tinta);font-family:var(--font-body);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--noche)}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);font-weight:500}
+.lead{font-size:1.12rem;color:var(--tinta-2);max-width:62ch}
+.sec{padding-block:96px}
+.sec-head{display:grid;gap:14px;margin-bottom:48px;max-width:760px}
+:focus-visible{outline:3px solid var(--brillo);outline-offset:3px;border-radius:4px}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:.02em;text-decoration:none;border:0;cursor:pointer;padding:14px 22px;border-radius:8px;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-primary{background:var(--azul);color:var(--blanco);box-shadow:0 8px 24px -10px rgba(29,78,216,.8)}
+.btn-primary:hover{background:var(--azul-hover);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--blanco);box-shadow:inset 0 0 0 1.5px rgba(169,193,255,.45)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--celeste);background:rgba(169,193,255,.08)}
+.btn-dark{background:var(--marino);color:var(--blanco)}
+.btn-dark:hover{background:var(--pizarra)}
+
+/* Navegación */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(5,7,13,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(169,193,255,.12)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--blanco)}
+.brand img{width:30px;height:auto;filter:drop-shadow(0 0 8px rgba(59,139,255,.6))}
+.brand span{font-family:var(--font-display);font-weight:700;font-size:1.35rem;letter-spacing:.14em}
+.nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav-links a{text-decoration:none;color:#C9D4EA;font-size:.95rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--blanco)}
+.nav-cta{padding:10px 18px;font-size:.92rem}
+.menu-btn{display:none;background:none;border:0;color:var(--blanco);cursor:pointer;padding:8px}
+.menu-btn svg{width:26px;height:26px}
+
+/* Hero */
+.hero{background:radial-gradient(1000px 520px at 78% 40%,rgba(29,78,216,.32),transparent 60%),radial-gradient(700px 400px at 10% 110%,rgba(20,33,58,.9),transparent 70%),var(--noche);color:var(--blanco);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(169,193,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(169,193,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 70% 45%,#000 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 70% 45%,#000 20%,transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:88px 96px}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.tag{display:inline-flex;align-items:center;gap:10px;justify-self:start;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--celeste);padding:7px 14px;border-radius:999px;border:1px solid rgba(169,193,255,.25);background:rgba(20,33,58,.55)}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#34D399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.3rem);font-weight:700}
+.hero h1 em{font-style:normal;color:var(--brillo);text-shadow:0 0 28px rgba(59,139,255,.45)}
+.hero .lead{color:#B8C4DC;font-size:1.18rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:12px 28px;padding-top:10px;border-top:1px solid rgba(169,193,255,.14);margin-top:6px}
+.hero-facts div{display:grid;gap:2px}
+.hero-facts b{font-family:var(--font-display);font-size:1.45rem;font-weight:600;color:var(--blanco)}
+.hero-facts span{font-size:.85rem;color:#8E9BB7}
+
+/* Visual del hero: escudo + monitor en vivo */
+.hero-visual{position:relative;min-height:440px;display:grid;place-items:center}
+.ring{position:absolute;width:400px;height:400px;max-width:100%;border-radius:50%;border:1px solid rgba(59,139,255,.25)}
+.ring::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 78%,rgba(59,139,255,.55) 92%,transparent);mask:radial-gradient(circle,transparent 66%,#000 67%);-webkit-mask:radial-gradient(circle,transparent 66%,#000 67%);animation:spin 6s linear infinite}
+.ring.r2{width:300px;height:300px;border-style:dashed;border-color:rgba(169,193,255,.15)}
+.ring.r2::before{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-logo{width:min(230px,56%);position:relative;filter:drop-shadow(0 0 40px rgba(59,139,255,.45))}
+.feed{position:absolute;right:0;bottom:12px;width:250px;border-radius:10px;overflow:hidden;background:#0B1222;border:1px solid rgba(169,193,255,.22);box-shadow:0 24px 50px -20px rgba(0,0,0,.9);font-family:var(--font-mono);font-size:.72rem;color:#C9D4EA}
+.feed-top{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(20,33,58,.9)}
+.rec{display:inline-flex;align-items:center;gap:6px;color:#FF8A9B}
+.rec i{width:7px;height:7px;border-radius:50%;background:var(--rojo);animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.feed-view{height:120px;position:relative;background:linear-gradient(160deg,#1A2A48 0%,#0D1628 60%,#0A1020 100%)}
+.feed-view::before{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,#1E2E4E,#121D33);clip-path:polygon(0 30%,100% 0,100% 100%,0 100%)}
+.feed-view .door{position:absolute;left:30px;bottom:30%;width:34px;height:58px;background:#24365A;border:1px solid #33507F}
+.feed-view .box{position:absolute;left:128px;top:24px;width:42px;height:74px;border:1.5px solid #34D399;border-radius:3px}
+.feed-view .box::before{content:"";position:absolute;left:12px;top:8px;width:16px;height:16px;border-radius:50%;background:#5470A0}
+.feed-view .box::after{content:"";position:absolute;left:7px;top:27px;width:26px;height:40px;border-radius:12px 12px 2px 2px;background:#4A6593}
+.feed-view .lbl{position:absolute;left:128px;top:8px;background:#34D399;color:#05231A;padding:1px 5px;border-radius:2px;font-size:.62rem;font-weight:500}
+.feed-bot{padding:9px 10px;display:flex;justify-content:space-between;color:#8E9BB7}
+.alert{position:absolute;left:0;top:34px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.97);color:var(--tinta);padding:12px 14px;border-radius:10px;box-shadow:0 20px 40px -18px rgba(0,0,0,.8);width:240px}
+.alert img{width:22px;flex:none}
+.alert b{display:block;font-size:.86rem;font-family:var(--font-display)}
+.alert small{color:var(--tinta-2);font-size:.76rem}
+
+/* Banda de confianza */
+.strip{background:var(--marino);color:#D6DEEE}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-block:26px}
+.strip div{display:flex;align-items:center;gap:12px;font-size:.95rem;min-width:0}
+.strip svg{width:26px;height:26px;flex:none;color:var(--celeste)}
+
+/* Productos */
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.product:hover{transform:translateY(-4px);box-shadow:0 22px 44px -24px rgba(20,33,58,.45)}
+.product-img{height:240px;display:grid;place-items:center;background:#FFFFFF;border-bottom:1px solid var(--linea);position:relative}
+.product-img img{max-height:200px;width:auto}
+.product-img .chip{position:absolute;top:14px;left:14px}
+.chip{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--marino);color:var(--blanco)}
+.chip.amber{background:var(--ambar);color:#231A00}
+.product-body{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.product-body p{color:var(--tinta-2);font-size:.97rem}
+.specs{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.92rem}
+.specs li{display:flex;gap:10px;align-items:flex-start}
+.specs li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:1px;background:var(--azul);transform:rotate(45deg)}
+.price-row{margin-top:auto;padding-top:16px;border-top:1px solid var(--linea);display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.price{font-family:var(--font-display);font-size:1.9rem;font-weight:700;color:var(--marino);font-variant-numeric:tabular-nums;line-height:1}
+.price small{font-family:var(--font-body);font-size:.85rem;font-weight:500;color:var(--tinta-2)}
+.link{font-weight:600;color:var(--azul);text-decoration:none;font-size:.95rem}
+.link:hover{text-decoration:underline}
+.cloud-art{width:100%;height:100%;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#1D3466,#0B1222 70%)}
+.phone{width:112px;height:200px;border-radius:18px;background:#05070D;border:3px solid #2A3A5C;padding:10px 7px;display:grid;grid-template-rows:auto 1fr 1fr auto;gap:6px;box-shadow:0 0 40px rgba(59,139,255,.35)}
+.phone .ph-top{height:6px;width:36px;border-radius:4px;background:#1F2D4A;justify-self:center}
+.phone .cam{border-radius:5px;background:linear-gradient(150deg,#26406F,#101B33);position:relative}
+.phone .cam::after{content:"";position:absolute;right:5px;top:5px;width:5px;height:5px;border-radius:50%;background:var(--rojo)}
+.phone .bar{height:20px;border-radius:5px;background:var(--azul);display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em}
+
+/* Paquete destacado */
+.bundle{margin-top:28px;background:linear-gradient(120deg,var(--marino),#0B1428 70%);color:var(--blanco);border-radius:16px;padding:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;position:relative;overflow:hidden}
+.bundle::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(59,139,255,.35),transparent 70%);pointer-events:none}
+.bundle h3{font-size:clamp(1.6rem,3vw,2.2rem)}
+.bundle p{color:#B8C4DC;margin-top:10px;max-width:52ch}
+.bundle-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.bundle-list span{font-size:.88rem;padding:6px 12px;border-radius:6px;background:rgba(169,193,255,.12);color:#DCE4F5}
+.bundle-price{display:grid;gap:14px;justify-items:start;position:relative;z-index:1}
+.bundle-price .price{color:var(--blanco);font-size:3rem}
+.bundle-price .price small{color:#B8C4DC}
+
+/* Cotizador */
+.quote{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start}
+.panel{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:28px}
+.q-row{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding-block:20px;border-bottom:1px solid var(--linea)}
+.q-row:first-child{padding-top:0}
+.q-row:last-child{border-bottom:0;padding-bottom:0}
+.q-row label,.q-row .q-name{font-family:var(--font-display);font-weight:600;font-size:1.08rem;display:block}
+.q-row small{color:var(--tinta-2);font-size:.88rem;display:block;margin-top:2px}
+.stepper{display:flex;align-items:center;border:1.5px solid var(--linea);border-radius:8px;overflow:hidden}
+.stepper button{width:42px;height:42px;border:0;background:var(--claro);font-size:1.3rem;cursor:pointer;color:var(--marino);font-weight:600}
+.stepper button:hover{background:#DFE6F2}
+.stepper button:disabled{opacity:.35;cursor:not-allowed}
+.stepper output{width:48px;text-align:center;font-family:var(--font-display);font-size:1.2rem;font-weight:600;font-variant-numeric:tabular-nums}
+.switch{position:relative;width:54px;height:30px;flex:none}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.switch span{position:absolute;inset:0;border-radius:999px;background:#C9D3E3;transition:background .2s}
+.switch span::after{content:"";position:absolute;left:4px;top:4px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.switch input:checked+span{background:var(--azul)}
+.switch input:checked+span::after{transform:translateX(24px)}
+.switch input:focus-visible+span{outline:3px solid var(--brillo);outline-offset:3px}
+.summary{background:var(--noche);color:#DCE4F5;border-radius:14px;padding:28px;position:sticky;top:96px;display:grid;gap:18px}
+.summary h3{color:var(--blanco)}
+.lines{display:grid;gap:10px;font-size:.95rem;min-height:60px}
+.line{display:flex;justify-content:space-between;gap:12px}
+.line span:last-child{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--blanco);white-space:nowrap}
+.line.muted{color:#7F8CA8}
+.total{border-top:1px solid rgba(169,193,255,.2);padding-top:16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.total b{font-family:var(--font-display);font-size:2.2rem;color:var(--blanco);font-variant-numeric:tabular-nums}
+.monthly{font-size:.95rem;color:var(--celeste);font-family:var(--font-mono)}
+.match{display:none;font-size:.88rem;background:rgba(224,161,0,.15);color:#F5CB5C;border:1px solid rgba(224,161,0,.35);padding:8px 12px;border-radius:8px}
+.match.show{display:block}
+.summary .btn{justify-content:center}
+
+/* Diferenciadores */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.feature{background:var(--blanco);padding:32px 28px;display:grid;gap:12px;align-content:start}
+.feature svg{width:34px;height:34px;color:var(--azul)}
+.feature p{color:var(--tinta-2);font-size:.97rem}
+
+/* Proceso */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s;position:relative}
+.step{display:grid;gap:10px;align-content:start;position:relative}
+.step-n{font-family:var(--font-mono);font-size:.82rem;color:var(--azul);display:flex;align-items:center;gap:12px}
+.step-n::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--celeste) 0 6px,transparent 6px 11px)}
+.step:last-child .step-n::after{display:none}
+.step p{color:var(--tinta-2);font-size:.97rem}
+
+/* Hecho en Mazatlán */
+.made{background:var(--marino);color:#DCE4F5}
+.made .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.made h2{color:var(--blanco)}
+.made .eyebrow{color:var(--celeste)}
+.made .lead{color:#B8C4DC}
+.made-copy{display:grid;gap:18px}
+.line-prod{background:rgba(5,7,13,.45);border:1px solid rgba(169,193,255,.15);border-radius:14px;padding:26px;display:grid;gap:4px;font-family:var(--font-mono);font-size:.88rem}
+.lp-head{display:flex;justify-content:space-between;color:var(--celeste);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding-bottom:12px;margin-bottom:6px;border-bottom:1px solid rgba(169,193,255,.15)}
+.lp-row{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:9px 0}
+.lp-row i{font-style:normal;color:#7F8CA8}
+.lp-row span:last-child{color:var(--blanco)}
+.lp-bar{height:4px;border-radius:2px;background:rgba(169,193,255,.12);margin:-4px 0 4px 40px;overflow:hidden}
+.lp-bar b{display:block;height:100%;background:var(--brillo);border-radius:2px}
+.lp-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:8px;border-top:1px solid rgba(169,193,255,.15);color:var(--blanco)}
+.made-nums{display:flex;flex-wrap:wrap;gap:16px 36px}
+.made-nums div{display:grid}
+.made-nums b{font-family:var(--font-display);font-size:2rem;color:var(--blanco)}
+.made-nums span{font-size:.88rem;color:#8E9BB7}
+
+/* Para quién */
+.segments{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.segment{border-top:3px solid var(--azul);padding-top:20px;display:grid;gap:10px;align-content:start}
+.segment:nth-child(2){border-color:var(--marino)}
+.segment:nth-child(3){border-color:var(--ambar)}
+.segment p{color:var(--tinta-2)}
+.segment .rec-tag{font-family:var(--font-mono);font-size:.8rem;color:var(--marino);background:var(--blanco);border:1px solid var(--linea);padding:6px 10px;border-radius:6px;justify-self:start}
+
+/* Nosotros */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mv{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:30px;display:grid;gap:12px;align-content:start}
+.mv p{color:var(--tinta-2)}
+.values{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:16px}
+.value{display:grid;gap:8px;align-content:start}
+.value h3{font-size:1.1rem}
+.value p{color:var(--tinta-2);font-size:.95rem}
+
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:860px}
+details{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:0 22px}
+summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--font-display);font-weight:600;font-size:1.08rem;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;color:var(--azul);transition:transform .2s;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding-bottom:20px;color:var(--tinta-2);max-width:70ch}
+
+/* Contacto */
+.contact{background:var(--noche);color:#DCE4F5;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;left:-200px;bottom:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.25),transparent 70%)}
+.contact .wrap{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px}
+.contact h2{color:var(--blanco)}
+.contact .eyebrow{color:var(--celeste)}
+.contact .lead{color:#B8C4DC}
+.contact-info{display:grid;gap:22px;align-content:start}
+.info-item{display:flex;gap:14px}
+.info-item svg{width:22px;height:22px;flex:none;color:var(--celeste);margin-top:3px}
+.info-item b{display:block;color:var(--blanco);font-weight:600}
+.info-item span{color:#9AA7C2;font-size:.95rem}
+form{background:#0B1222;border:1px solid rgba(169,193,255,.16);border-radius:14px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:grid;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:.88rem;color:#B8C4DC;font-weight:500}
+.field input,.field select,.field textarea{font:inherit;font-size:.98rem;color:var(--blanco);background:#05070D;border:1px solid #26324D;border-radius:8px;padding:12px 14px;width:100%}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brillo);box-shadow:0 0 0 3px rgba(59,139,255,.25)}
+.field select{color-scheme:dark}
+form .btn{grid-column:1/-1;justify-content:center;padding-block:16px}
+.ok{grid-column:1/-1;display:none;background:rgba(46,125,107,.18);border:1px solid rgba(46,125,107,.6);color:#BFEBDD;padding:14px 16px;border-radius:8px;font-size:.95rem}
+.ok.show{display:block}
+
+/* Footer */
+footer{background:#03050A;color:#8E9BB7;font-size:.92rem}
+footer .wrap{padding-block:56px 32px;display:grid;gap:40px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot-top h4{font-family:var(--font-display);color:var(--blanco);font-size:1rem;margin:0 0 14px;letter-spacing:.04em}
+.foot-top ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.foot-top a{text-decoration:none}
+.foot-top a:hover{color:var(--blanco)}
+.foot-brand{display:grid;gap:14px;align-content:start}
+.foot-brand img{width:120px}
+.foot-bot{border-top:1px solid #151D2E;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.85rem}
+
+/* Carrito */
+.btn-sm{padding:10px 16px;font-size:.92rem}
+.cart-btn{position:relative;background:none;border:1px solid rgba(169,193,255,.25);color:var(--blanco);border-radius:8px;width:44px;height:44px;display:grid;place-items:center;cursor:pointer;flex:none}
+.cart-btn:hover{border-color:var(--celeste)}
+.cart-btn svg{width:22px;height:22px}
+.badge{position:absolute;top:-7px;right:-7px;min-width:21px;height:21px;padding:0 5px;border-radius:999px;background:var(--ambar);color:#231A00;font-family:var(--font-mono);font-size:.72rem;font-weight:500;display:grid;place-items:center}
+.badge.bump{animation:bump .4s}
+@keyframes bump{40%{transform:scale(1.35)}}
+.nav-right{display:flex;align-items:center;gap:12px}
+#fsBtn .fs-off{display:none}
+#fsBtn.on .fs-on{display:none}
+#fsBtn.on .fs-off{display:block}
+:fullscreen{background:var(--claro)}
+html.is-fs #pnBack{display:none}
+::backdrop{background:var(--noche)}
+.scrim{position:fixed;inset:0;background:rgba(5,7,13,.6);z-index:90;backdrop-filter:blur(2px)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--blanco);z-index:100;display:flex;flex-direction:column;box-shadow:-24px 0 60px -20px rgba(5,7,13,.5);animation:slideIn .28s ease-out;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+@keyframes slideIn{from{transform:translateX(100%)}}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--linea)}
+.x{background:none;border:0;cursor:pointer;color:var(--tinta-2);width:40px;height:40px;border-radius:8px;display:grid;place-items:center}
+.x:hover{background:var(--claro)}
+.x svg{width:22px;height:22px}
+.drawer-body{flex:1;overflow-y:auto;padding:8px 24px 20px}
+.item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--linea)}
+.item-img{width:64px;height:64px;border-radius:8px;background:var(--claro);display:grid;place-items:center;overflow:hidden}
+.item-img img{max-height:56px;width:auto}
+.item-img.dark{background:var(--marino)}
+.item-name{font-family:var(--font-display);font-weight:600;line-height:1.25}
+.item-sub{font-size:.85rem;color:var(--tinta-2)}
+.item-right{display:grid;justify-items:end;gap:8px}
+.item-price{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:.95rem}
+.mini{display:flex;align-items:center;border:1px solid var(--linea);border-radius:6px}
+.mini button{width:30px;height:30px;border:0;background:none;cursor:pointer;font-size:1.05rem;color:var(--marino)}
+.mini button:hover{background:var(--claro)}
+.mini button:disabled{opacity:.3;cursor:not-allowed}
+.mini span{min-width:26px;text-align:center;font-family:var(--font-mono);font-size:.9rem}
+.remove{background:none;border:0;color:var(--tinta-2);font-size:.8rem;cursor:pointer;text-decoration:underline;padding:0}
+.cloud-row{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:18px;padding:16px;border-radius:10px;background:var(--claro)}
+.cloud-row b{font-family:var(--font-display);display:block}
+.cloud-row small{color:var(--tinta-2);font-size:.85rem}
+.empty{display:grid;justify-items:center;text-align:center;gap:12px;padding:56px 12px;color:var(--tinta-2)}
+.empty svg{width:48px;height:48px;color:var(--celeste)}
+.empty b{font-family:var(--font-display);color:var(--tinta);font-size:1.15rem}
+.drawer-foot{border-top:1px solid var(--linea);padding:18px 24px 22px;display:grid;gap:10px;background:#FAFBFD}
+.sum-line{display:flex;justify-content:space-between;gap:12px;font-size:.95rem;color:var(--tinta-2)}
+.sum-line span:last-child{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--tinta)}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:8px;border-top:1px solid var(--linea)}
+.sum-total b{font-family:var(--font-display);font-size:1.7rem;font-variant-numeric:tabular-nums}
+.drawer-foot .btn{justify-content:center}
+.drawer-foot .btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.note{font-size:.85rem;color:var(--tinta-2);text-align:center}
+.warn{font-size:.85rem;color:#8A2434;background:#FBECEE;border-radius:8px;padding:8px 12px}
+
+[hidden]{display:none!important}
+.sheet:has(.sheet-side[hidden]){grid-template-columns:1fr;width:min(600px,100%)}
+/* Checkout */
+.modal{position:fixed;inset:0;z-index:110;background:rgba(5,7,13,.65);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--blanco);border-radius:16px;width:min(880px,100%);max-height:calc(100% - 8px);overflow:auto;display:grid;grid-template-columns:1fr 300px;box-shadow:0 40px 80px -30px rgba(5,7,13,.7);animation:pop .25s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.sheet-main{padding:28px 32px 32px;display:grid;gap:22px;align-content:start;min-width:0}
+.sheet-side{background:var(--noche);color:#DCE4F5;padding:28px 24px;display:grid;gap:14px;align-content:start;border-radius:0 16px 16px 0}
+.sheet-side h3{color:var(--blanco);font-size:1.1rem}
+.sheet-side .sum-line{color:#9AA7C2}
+.sheet-side .sum-line span:last-child{color:var(--blanco)}
+.sheet-side .sum-total{border-color:rgba(169,193,255,.2)}
+.sheet-side .sum-total b{color:var(--blanco)}
+.sheet-side .monthly{font-size:.88rem}
+.progress{display:flex;gap:8px;list-style:none;margin:0;padding:0;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.progress li{flex:1;display:grid;gap:8px;color:#8E9BB7}
+.progress li::before{content:"";height:4px;border-radius:2px;background:var(--linea)}
+.progress li.on{color:var(--azul)}
+.progress li.on::before{background:var(--azul)}
+.sheet-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.ck-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ck-form .field label{color:var(--tinta);font-weight:600}
+.ck-form .field input{background:var(--blanco);color:var(--tinta);border:1.5px solid var(--linea)}
+.ck-form .field input:focus{border-color:var(--azul)}
+.ck-form .field input[aria-invalid="true"]{border-color:var(--rojo)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--linea);border-radius:10px;padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--celeste)}
+.opt input{margin-top:4px;accent-color:var(--azul);width:18px;height:18px;flex:none}
+.opt b{display:block;font-family:var(--font-display);font-weight:600}
+.opt small{color:var(--tinta-2);font-size:.88rem}
+.opt:has(input:checked){border-color:var(--azul);background:#F3F6FE}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.slot{border:1.5px solid var(--linea);background:var(--blanco);border-radius:10px;padding:10px 6px;text-align:center;cursor:pointer;font:inherit;color:var(--tinta);display:grid;gap:2px}
+.slot small{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;color:var(--tinta-2);letter-spacing:.06em}
+.slot b{font-family:var(--font-display);font-size:1.35rem;line-height:1.1}
+.slot:hover{border-color:var(--celeste)}
+.slot[aria-pressed="true"]{border-color:var(--azul);background:var(--azul);color:#fff}
+.slot[aria-pressed="true"] small{color:#DCE4F5}
+.ck-label{font-family:var(--font-display);font-weight:600;font-size:1.02rem}
+.ck-actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.btn-line{background:var(--blanco);color:var(--marino);box-shadow:inset 0 0 0 1.5px var(--linea)}
+.btn-line:hover{box-shadow:inset 0 0 0 1.5px var(--marino)}
+.err{color:#8A2434;font-size:.9rem}
+.done{display:grid;justify-items:start;gap:14px}
+.done-icon{width:56px;height:56px;border-radius:50%;background:rgba(46,125,107,.12);color:var(--verde);display:grid;place-items:center}
+.done-icon svg{width:30px;height:30px}
+.order-no{font-family:var(--font-mono);font-size:.95rem;background:var(--claro);padding:6px 12px;border-radius:6px}
+.done-list{display:grid;gap:10px;width:100%;margin:0;padding:0;list-style:none}
+.done-list li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--linea);padding-bottom:10px}
+.done-list li span:first-child{color:var(--tinta-2)}
+.done-list li span:last-child{font-weight:600;text-align:right}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--marino);color:#fff;padding:12px 18px;border-radius:10px;z-index:120;font-size:.95rem;box-shadow:0 16px 40px -16px rgba(5,7,13,.8);animation:pop .2s ease-out}
+@media (max-width:760px){
+  .sheet{grid-template-columns:1fr}
+  .sheet-side{border-radius:0 0 16px 16px;order:2}
+  .sheet-main{padding:22px 20px 26px}
+  .ck-form{grid-template-columns:1fr}
+}
+
+/* Panel de pedidos */
+.pv{min-height:70vh;background:var(--claro)}
+.pv .wrap{max-width:1340px}
+#pnContent{display:grid;gap:24px}
+.pv-head{background:var(--noche);color:#DCE4F5;border-bottom:1px solid rgba(169,193,255,.12)}
+.pv-head .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-block:40px 32px}
+.pv-title{display:grid;gap:8px;min-width:0}
+.pv-title .eyebrow{color:var(--celeste)}
+.pv-title h1{font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--blanco)}
+.pv-title p{color:#9AA7C2;max-width:60ch}
+.pv-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pn-mode{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid rgba(169,193,255,.25);color:var(--celeste)}
+.pn-mode.online{border-color:rgba(52,211,153,.45);color:#7EE2BC}
+.pn-mode.local{border-color:rgba(224,161,0,.5);color:#F5CB5C}
+.pv-body{padding-block:32px 72px;display:grid;gap:24px}
+.pn-note{background:#FFF7E0;border:1px solid #F0D68A;color:#5C4300;padding:12px 16px;border-radius:10px}
+.pn-locked{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:48px 24px;display:grid;justify-items:center;text-align:center;gap:10px;color:var(--tinta-2)}
+.pn-locked svg{width:40px;height:40px;color:var(--azul)}
+.pn-locked b{font-family:var(--font-display);font-size:1.2rem;color:var(--tinta)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;padding:18px 20px;display:grid;gap:4px}
+.kpi span{font-size:.88rem;color:var(--tinta-2)}
+.kpi b{font-family:var(--font-display);font-size:1.9rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi.alert-kpi{border-color:#F0D68A;background:#FFFBEF}
+.kpi.alert-kpi b{color:#A87800}
+.pv-grid{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;align-items:start}
+.pv-main{display:grid;gap:14px;min-width:0}
+.pv-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.pchips{display:flex;gap:8px;flex-wrap:wrap}
+.pchip{font:inherit;font-size:.9rem;font-weight:500;border:1px solid var(--linea);background:var(--blanco);color:var(--tinta);padding:7px 12px;border-radius:999px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.pchip i{font-style:normal;font-family:var(--font-mono);font-size:.78rem;background:var(--claro);padding:1px 7px;border-radius:999px;color:var(--tinta-2)}
+.pchip[aria-pressed="true"]{background:var(--marino);border-color:var(--marino);color:#fff}
+.pchip[aria-pressed="true"] i{background:rgba(255,255,255,.16);color:#fff}
+.search{display:flex;align-items:center;gap:8px;background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:0 12px;min-width:0;flex:0 1 280px}
+.search svg{width:18px;height:18px;color:var(--tinta-2);flex:none}
+.search input{border:0;outline:0;font:inherit;font-size:.95rem;padding:10px 0;width:100%;background:transparent;color:var(--tinta)}
+.search:focus-within{border-color:var(--azul);box-shadow:0 0 0 3px rgba(29,78,216,.15)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.tbl-wrap{overflow-x:auto;background:var(--blanco);border:1px solid var(--linea);border-radius:12px}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:860px}
+.tbl th{text-align:left;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-2);font-weight:500;padding:12px 14px;background:#F7F9FC;border-bottom:1px solid var(--linea);white-space:nowrap}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--linea);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td small{display:block;color:var(--tinta-2);font-size:.82rem;margin-top:2px}
+.tbl td b{font-weight:600}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .mono{font-family:var(--font-mono);font-size:.85rem;white-space:nowrap}
+.tbl tr.st-cancelado td{opacity:.55}
+.tbl tr.st-por_asignar td:first-child{box-shadow:inset 3px 0 0 var(--ambar)}
+.ex{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;background:#EEF2F8;color:var(--pizarra);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:4px}
+.tbl select{font:inherit;font-size:.88rem;border:1px solid var(--linea);border-radius:6px;padding:6px 8px;background:var(--blanco);color:var(--tinta);cursor:pointer}
+.tbl select:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(29,78,216,.15)}
+.est{font-weight:600}
+.est-por_asignar{background:#FFF7E0!important;border-color:#F0D68A!important;color:#7A5900!important}
+.est-agendado{background:#EEF3FF!important;border-color:var(--celeste)!important;color:var(--azul)!important}
+.est-instalado{background:#E9F5F1!important;border-color:#A7D3C5!important;color:var(--verde)!important}
+.est-cancelado{background:#FBECEE!important;border-color:#EBB8C0!important;color:#8A2434!important}
+.pn-empty{background:var(--blanco);border:1px dashed var(--celeste);border-radius:12px;padding:40px 24px;text-align:center;display:grid;gap:8px;color:var(--tinta-2);justify-items:center}
+.pn-empty b{font-family:var(--font-display);font-size:1.15rem;color:var(--tinta)}
+.pn-empty p{max-width:52ch}
+.pv-side{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;padding:20px;display:grid;gap:14px}
+.side-sub{color:var(--tinta-2);font-size:.86rem;margin-top:-8px}
+.tecs{display:grid;gap:14px}
+.tec{display:grid;gap:6px}
+.tec-top{display:flex;justify-content:space-between;gap:8px;font-size:.92rem}
+.tec-top span{color:var(--tinta-2);font-size:.85rem}
+.tec-bar{height:6px;border-radius:3px;background:var(--claro);overflow:hidden}
+.tec-bar i{display:block;height:100%;background:var(--azul);border-radius:3px}
+.tec small{color:var(--tinta-2);font-size:.82rem}
+@media (max-width:1020px){.pv-grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.tecs{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
+@media (max-width:640px){.pv-actions{width:100%}.kpi b{font-size:1.5rem}.search{flex:1 1 100%}}
+
+/* Responsive */
+@media (max-width:1020px){
+  .nav-links{gap:20px}
+  .products{grid-template-columns:1fr 1fr}
+  .products .product:last-child{grid-column:1/-1;flex-direction:row}
+  .products .product:last-child .product-img{width:40%;height:auto;min-height:260px}
+  .features{grid-template-columns:1fr 1fr}
+  .values{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none}
+  .menu-btn{display:block}
+  .nav.open .nav-links{display:grid;position:absolute;top:70px;left:0;right:0;background:var(--noche);padding:12px max(20px,env(safe-area-inset-right,0px)) 20px max(20px,env(safe-area-inset-left,0px));gap:4px;border-bottom:1px solid rgba(169,193,255,.15)}
+  .nav.open .nav-links a{display:block;padding:12px 0;font-size:1.05rem}
+  .hero .wrap{grid-template-columns:1fr;padding-block:56px 64px}
+  .hero-visual{min-height:380px}
+  .strip .wrap{grid-template-columns:1fr 1fr}
+  .bundle{grid-template-columns:1fr;padding:30px}
+  .quote{grid-template-columns:1fr}
+  .summary{position:static}
+  .steps{grid-template-columns:1fr 1fr;row-gap:36px}
+  .step:nth-child(2) .step-n::after{display:none}
+  .made .wrap,.contact .wrap{grid-template-columns:1fr;gap:40px}
+  .segments{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr}
+  .sec{padding-block:72px}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .products{grid-template-columns:1fr}
+  .products .product:last-child{flex-direction:column}
+  .products .product:last-child .product-img{width:auto;min-height:0;height:240px}
+  .features{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .step-n::after{display:none}
+  .values{grid-template-columns:1fr}
+  form{grid-template-columns:1fr;padding:22px}
+  .foot-top{grid-template-columns:1fr}
+  .feed{width:210px;right:-4px}
+  .alert{width:210px;top:6px}
+  .ring{width:320px;height:320px}
+  .ring.r2{width:240px;height:240px}
+  .strip .wrap{grid-template-columns:1fr}
+  .q-row{grid-template-columns:1fr}
+  .panel,.summary{padding:22px}
+  .bundle-price .price{font-size:2.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+<link rel="icon" href="assets/escudo.png">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="FORTEX, inicio">
+      <img src="assets/escudo.png" alt="">
+      <span>FORTEX</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#cotizador">Cotizador</a></li>
+      <li><a href="#tecnologia">Tecnología</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+    <a class="btn btn-primary nav-cta" href="#cotizador">Comprar</a>
+    <button class="cart-btn" id="fsBtn" type="button" aria-label="Pantalla completa (tecla F)" title="Pantalla completa (F)" hidden>
+      <svg class="fs-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      <svg class="fs-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+    </button>
+    <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20.5" r="1.2"/><circle cx="17" cy="20.5" r="1.2"/></svg>
+      <span class="badge" id="badge" hidden>0</span>
+    </button>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="tag"><span class="live-dot"></span>Monitoreo 24/7 · Mazatlán, Sinaloa</span>
+      <h1>Tu casa y tu negocio, <em>vigilados de verdad.</em></h1>
+      <p class="lead">Cámaras 1080p fabricadas en Mazatlán, cerraduras con huella y reconocimiento facial, y una nube para ver todo desde tu celular. Un solo sistema, un solo proveedor.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#cotizador">Arma tu sistema
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#productos">Ver productos</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>1080p</b><span>Full HD con visión nocturna</span></div>
+        <div><b>2 en 1</b><span>Huella y rostro con IA</span></div>
+        <div><b>24/7</b><span>Respaldo en la nube</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="ring r2"></div>
+      <img class="hero-logo" src="assets/escudo-grande.png" alt="">
+      <div class="alert">
+        <img src="assets/escudo.png" alt="">
+        <div><b>Persona detectada</b><small>Cochera · hace 12 s</small></div>
+      </div>
+      <div class="feed">
+        <div class="feed-top"><span>CAM 02 · ENTRADA</span><span class="rec"><i></i>EN VIVO</span></div>
+        <div class="feed-view"><div class="door"></div><span class="lbl">PERSONA 97%</span><div class="box"></div></div>
+        <div class="feed-bot"><span>1080p · IR</span><span id="clock">21:42:08</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDA -->
+<section class="strip" aria-label="Garantías FORTEX">
+  <div class="wrap">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6"/></svg>Hecho en Mazatlán</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Instalación incluida</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Todo desde tu smartphone</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Mantenimiento y soporte</div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="sec" id="productos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Productos</span>
+      <h2>Tres piezas que trabajan como una sola</h2>
+      <p class="lead">Ensamblamos cada equipo en nuestra planta: armamos las placas, cargamos el software con IA y lo probamos antes de que llegue a tu puerta.</p>
+    </div>
+
+    <div class="products">
+      <article class="product">
+        <div class="product-img"><span class="chip">Hecha en Mazatlán</span><img src="assets/camara.png" alt="Cámara FORTEX 1080p blanca para exterior"></div>
+        <div class="product-body">
+          <h3>Cámara FORTEX 1080p</h3>
+          <p>Detecta personas dentro del propio equipo, así que te avisa aunque se caiga el internet.</p>
+          <ul class="specs">
+            <li>Sensor CMOS Full HD y lente f/1.6 de 4 mm</li>
+            <li>Chip de IA (NPU) para detectar personas</li>
+            <li>6 LEDs infrarrojos para ver de noche</li>
+            <li>Batería de 8,000 mAh: sigue grabando de 8 a 12 h sin luz</li>
+            <li>Resistente a agua y polvo (IP67)</li>
+            <li>microSD de 64 GB incluida, admite hasta 256 GB</li>
+          </ul>
+          <div class="price-row">
+            <div class="price">$1,100 <small>MXN / pieza</small></div>
+            <button class="btn btn-dark btn-sm" type="button" data-add="cam">Agregar al carrito</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-img"><span class="chip">Huella + rostro</span><img src="assets/cerradura.png" alt="Cerradura biométrica FORTEX negra con lector de huella y cámara"></div>
+        <div class="product-body">
+          <h3>Cerradura biométrica</h3>
+          <p>Abre con tu huella o tu cara, también de noche. Sin llaves que copiar ni tarjetas que perder.</p>
+          <ul class="specs">
+            <li>Sensor de huella capacitivo, difícil de engañar</li>
+            <li>Reconocimiento facial con cámara 1080p e infrarrojo</li>
+            <li>Cerrojo metálico con motor: sigue cerrada aunque no haya luz</li>
+            <li>Respaldo con llave mecánica y batería recargable</li>
+            <li>Wi-Fi: autoriza accesos desde tu celular</li>
+          </ul>
+          <div class="price-row">
+            <div class="price">$4,200 <small>MXN</small></div>
+            <button class="btn btn-dark btn-sm" type="button" data-add="lock">Agregar al carrito</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product">
+        <div class="product-img">
+          <div class="cloud-art" aria-hidden="true">
+            <div class="phone"><div class="ph-top"></div><div class="cam"></div><div class="cam"></div><div class="bar">ABRIR PUERTA</div></div>
+          </div>
+          <span class="chip amber">Suscripción</span>
+        </div>
+        <div class="product-body">
+          <h3>Nube FORTEX</h3>
+          <p>Tus grabaciones respaldadas fuera de casa. Si alguien se lleva la cámara, el video ya está a salvo.</p>
+          <ul class="specs">
+            <li>Ve tus cámaras en vivo desde el smartphone</li>
+            <li>Respaldo de grabaciones y registros de acceso</li>
+            <li>Alertas cuando la IA detecta a una persona</li>
+            <li>Controla tus cerraduras a distancia</li>
+            <li>Cancela cuando quieras</li>
+          </ul>
+          <div class="price-row">
+            <div class="price">$380 <small>MXN / mes</small></div>
+            <button class="btn btn-dark btn-sm" type="button" data-add="cloud">Agregar al carrito</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="bundle">
+      <div style="position:relative;z-index:1">
+        <span class="chip amber">El más vendido</span>
+        <h3 style="margin-top:16px">Paquete FORTEX: 4 cámaras + 1 acceso biométrico</h3>
+        <p>Lo que necesita una casa o un local para quedar cubierto por completo: entrada, cochera, patio y acceso principal. Lo instalamos y lo dejamos configurado en tu celular.</p>
+        <div class="bundle-list">
+          <span>4 cámaras 1080p</span><span>1 cerradura biométrica</span><span>Instalación y configuración</span><span>App en tu smartphone</span>
+        </div>
+      </div>
+      <div class="bundle-price">
+        <div class="price">$8,680 <small>MXN</small></div>
+        <span style="color:#B8C4DC;font-size:.95rem">Instalación incluida. Nube opcional: $380/mes.</span>
+        <button class="btn btn-primary" type="button" data-add="pack">Comprar paquete</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COTIZADOR -->
+<section class="sec" id="cotizador" style="background:var(--blanco);border-block:1px solid var(--linea)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Cotizador</span>
+      <h2>Arma tu sistema y cómpralo en línea</h2>
+      <p class="lead">Entre más cámaras instalas, menos pagas por cada una. Eliges el día de instalación al pagar y nuestros técnicos llegan con todo.</p>
+    </div>
+    <div class="quote">
+      <div class="panel" style="background:var(--claro)">
+        <div class="q-row">
+          <div><span class="q-name" id="lblCam">Cámaras 1080p</span><small>1 a 3: $1,100 c/u + $600 de instalación · 4 a 8: $1,000 c/u + $480</small></div>
+          <div class="stepper" role="group" aria-labelledby="lblCam">
+            <button type="button" id="camMinus" aria-label="Quitar una cámara">−</button>
+            <output id="camN" aria-live="polite">4</output>
+            <button type="button" id="camPlus" aria-label="Agregar una cámara">+</button>
+          </div>
+        </div>
+        <div class="q-row">
+          <div><span class="q-name" id="lblLock">Cerraduras biométricas</span><small>$4,200 c/u, instalación incluida</small></div>
+          <div class="stepper" role="group" aria-labelledby="lblLock">
+            <button type="button" id="lockMinus" aria-label="Quitar una cerradura">−</button>
+            <output id="lockN" aria-live="polite">1</output>
+            <button type="button" id="lockPlus" aria-label="Agregar una cerradura">+</button>
+          </div>
+        </div>
+        <div class="q-row">
+          <div><label for="cloud">Nube FORTEX</label><small>Respaldo y acceso desde tu celular · $380 al mes</small></div>
+          <div class="switch"><input type="checkbox" id="cloud" checked><span></span></div>
+        </div>
+      </div>
+      <aside class="summary" aria-live="polite">
+        <h3>Tu cotización</h3>
+        <div class="lines" id="lines"></div>
+        <div class="match" id="match">Esta combinación es nuestro Paquete FORTEX.</div>
+        <div class="total"><span>Pago único</span><b id="total">$8,680</b></div>
+        <div class="monthly" id="monthly">+ $380 al mes de nube</div>
+        <button class="btn btn-primary" type="button" id="addQuote">Agregar al carrito</button>
+        <a class="link" href="#contacto" id="sendQuote" style="color:var(--celeste);text-align:center">¿Prefieres que te visitemos antes? Solicita una cotización</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGÍA -->
+<section class="sec" id="tecnologia">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Por qué FORTEX</span>
+      <h2>Pensado para cuando las cosas fallan</h2>
+      <p class="lead">Un sistema de seguridad se prueba el día que se va la luz o el internet. Diseñamos cada pieza para ese día.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
+        <h3>IA dentro del equipo</h3>
+        <p>La detección de personas y el reconocimiento facial corren en el chip de cada cámara y cerradura. No dependen de internet para funcionar.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2M6 10v4M10 10v4"/></svg>
+        <h3>Sigue funcionando sin luz</h3>
+        <p>Las cámaras graban de 8 a 12 horas con su batería, y la cerradura se queda cerrada con su cerrojo metálico. Siempre tienes llave de respaldo.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0 3-1 6-3 8M8 6.5A6 6 0 0 1 18 11c0 2-.3 4-1 6M6 9a6 6 0 0 0-1 3c0 1.5-.3 3-1 4M12 11c0 4 1.5 7 2.5 9M15 11a3 3 0 0 0-6 0c0 2-.4 4-1.2 5.5"/></svg>
+        <h3>Dos formas de entrar</h3>
+        <p>Huella o rostro, a tu elección. El rostro funciona también de noche gracias a sus LEDs infrarrojos.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9" y="10" width="6" height="5" rx="1"/><path d="M10 10V8.5a2 2 0 0 1 4 0V10"/></svg>
+        <h3>Tus datos, protegidos</h3>
+        <p>Tratamos tus huellas, rostros y videos con estándares estrictos de ciberseguridad y confidencialidad. Nunca los compartimos.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+        <h3>Un solo proveedor</h3>
+        <p>Cámaras, cerraduras, nube, instalación y mantenimiento con la misma empresa. Una sola app y un solo número al que llamar.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>
+        <h3>Crece contigo</h3>
+        <p>Empieza con una cámara y agrega más equipos cuando lo necesites. Todo se suma al mismo sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la cotización a tu celular</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-n">PASO 1</span><h3>Cotizamos</h3><p>Nos cuentas qué quieres proteger. Te armamos una propuesta a la medida o eliges el paquete.</p></div>
+      <div class="step"><span class="step-n">PASO 2</span><h3>Instalamos</h3><p>Nuestros técnicos llevan los equipos, los instalan y los configuran. No contratas a nadie más.</p></div>
+      <div class="step"><span class="step-n">PASO 3</span><h3>Conectamos</h3><p>Dejamos la app lista en tu smartphone y registramos las huellas y rostros de tu familia o equipo.</p></div>
+      <div class="step"><span class="step-n">PASO 4</span><h3>Te respaldamos</h3><p>Mantenimiento preventivo y soporte técnico para que el sistema nunca deje de cuidar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HECHO EN MAZATLÁN -->
+<section class="sec made">
+  <div class="wrap">
+    <div class="made-copy">
+      <span class="eyebrow">Hecho en Mazatlán</span>
+      <h2>Cada cámara pasa por nuestras manos antes que por las tuyas</h2>
+      <p class="lead">En nuestra planta de Mazatlán montamos y soldamos las placas, ensamblamos, cargamos el software con IA y probamos cada equipo. Si no pasa la prueba, no sale.</p>
+      <div class="made-nums">
+        <div><b>19</b><span>cámaras al día</span></div>
+        <div><b>5</b><span>cerraduras al día</span></div>
+        <div><b>100%</b><span>equipos probados</span></div>
+      </div>
+    </div>
+    <div class="line-prod" aria-label="Tiempo de armado de una cámara por estación">
+      <div class="lp-head"><span>Armado de una cámara</span><span>Minutos</span></div>
+      <div class="lp-row"><i>01</i><span>Revisión de materiales</span><span>5</span></div><div class="lp-bar"><b style="width:12.5%"></b></div>
+      <div class="lp-row"><i>02</i><span>Armado y soldado de placas</span><span>25</span></div><div class="lp-bar"><b style="width:62.5%"></b></div>
+      <div class="lp-row"><i>03</i><span>Ensamble en carcasa IP67</span><span>40</span></div><div class="lp-bar"><b style="width:100%"></b></div>
+      <div class="lp-row"><i>04</i><span>Carga de software e IA</span><span>25</span></div><div class="lp-bar"><b style="width:62.5%"></b></div>
+      <div class="lp-row"><i>05</i><span>Prueba de imagen</span><span>10</span></div><div class="lp-bar"><b style="width:25%"></b></div>
+      <div class="lp-row"><i>06</i><span>Empaque y etiquetado</span><span>7</span></div><div class="lp-bar"><b style="width:17.5%"></b></div>
+      <div class="lp-total"><span>Total por cámara</span><span>1 h 52 min</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Soluciones</span>
+      <h2>Para el lugar que más te importa</h2>
+    </div>
+    <div class="segments">
+      <div class="segment">
+        <h3>Hogares</h3>
+        <p>Ve quién llega a tu casa desde el trabajo, abre la puerta a tu familia sin dar copias de llaves y recibe un aviso si alguien ronda la cochera.</p>
+        <span class="rec-tag">Recomendado: Paquete FORTEX</span>
+      </div>
+      <div class="segment">
+        <h3>Negocios y oficinas</h3>
+        <p>Controla quién entra y a qué hora con huella o rostro, vigila caja, bodega y estacionamiento, y guarda los registros en la nube.</p>
+        <span class="rec-tag">Recomendado: 4 a 8 cámaras + acceso</span>
+      </div>
+      <div class="segment">
+        <h3>Fraccionamientos y condominios</h3>
+        <p>Accesos biométricos para residentes y cámaras en entradas y áreas comunes, administrados desde una sola plataforma.</p>
+        <span class="rec-tag">Proyecto a la medida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section class="sec" id="nosotros" style="background:var(--blanco);border-block:1px solid var(--linea)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Nosotros</span>
+      <h2>Una empresa mazatleca de seguridad inteligente</h2>
+      <p class="lead">FORTEX Seguridad Inteligente diseña, ensambla, instala y mantiene sistemas de videovigilancia y acceso biométrico para hogares, negocios y empresas.</p>
+    </div>
+    <div class="about">
+      <div class="mv" style="background:var(--claro)">
+        <span class="eyebrow">Misión</span>
+        <p>Proteger lo que más importa a nuestros clientes con un servicio integral de seguridad: biometría de vanguardia, videovigilancia inteligente y respuesta oportuna, para darles tranquilidad en todo momento.</p>
+      </div>
+      <div class="mv" style="background:var(--claro)">
+        <span class="eyebrow">Visión</span>
+        <p>Ser la empresa líder a nivel nacional en seguridad integral e inteligente, reconocida por acercar la tecnología biométrica de alta gama a todos los hogares y negocios.</p>
+      </div>
+      <div class="values">
+        <div class="value"><h3>Innovación propia</h3><p>Diseñamos y construimos hardware y software en casa.</p></div>
+        <div class="value"><h3>Confiabilidad</h3><p>Equipos hechos para operar las 24 horas, los 365 días del año.</p></div>
+        <div class="value"><h3>Ética y privacidad</h3><p>Custodiamos imágenes y datos biométricos con total confidencialidad.</p></div>
+        <div class="value"><h3>Servicio proactivo</h3><p>Nos anticipamos a las fallas antes de que afecten tu protección.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Lo que más nos preguntan</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>¿Qué pasa si se va el internet?</summary>
+        <p>Las cámaras siguen grabando en su memoria microSD y siguen detectando personas, porque la IA está dentro del equipo. La cerradura sigue abriendo con huella y rostro. Cuando vuelve la conexión, todo se sincroniza con la nube.</p>
+      </details>
+      <details>
+        <summary>¿Y si se va la luz?</summary>
+        <p>Cada cámara tiene una batería de 8,000 mAh que la mantiene grabando de 8 a 12 horas. La cerradura tiene batería recargable, su cerrojo se queda cerrado sin energía y siempre puedes abrir con la llave mecánica de respaldo.</p>
+      </details>
+      <details>
+        <summary>¿Estoy obligado a contratar la nube?</summary>
+        <p>No. Los equipos funcionan sin ella y graban en memoria local. La nube agrega el respaldo fuera de tu casa, el acceso en vivo desde tu celular y las alertas, por $380 al mes.</p>
+      </details>
+      <details>
+        <summary>¿Quién instala los equipos?</summary>
+        <p>Nuestro propio equipo de técnicos. Llevamos el material, instalamos, configuramos la app en tu celular y registramos los accesos. La instalación ya viene incluida en los precios.</p>
+      </details>
+      <details>
+        <summary>¿Puedo agregar más cámaras después?</summary>
+        <p>Sí. El sistema crece contigo: cualquier cámara o cerradura nueva se suma a la misma app. Para más de 8 cámaras armamos un proyecto a la medida.</p>
+      </details>
+      <details>
+        <summary>¿Qué hacen con mi huella y mi rostro?</summary>
+        <p>Solo los usamos para abrir tu puerta. Se guardan cifrados en la memoria de la cerradura y en tu cuenta, y nunca los compartimos con terceros.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="sec contact" id="contacto">
+  <div class="wrap">
+    <div class="contact-info">
+      <span class="eyebrow">Contacto</span>
+      <h2>Cotiza sin compromiso</h2>
+      <p class="lead">Déjanos tus datos y un asesor te contacta para revisar lo que necesitas proteger.</p>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div><b>Sucursal y planta</b><span>#6012 Margarita Maza de Juárez, Mazatlán, Sinaloa</span></div>
+      </div>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><b>Horario de atención</b><span>Lunes a viernes de 9:00 a 19:00 · Sábado de 9:00 a 14:00</span></div>
+      </div>
+      <div class="info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><b>Monitoreo y soporte</b><span>24 horas, los 365 días del año</span></div>
+      </div>
+    </div>
+    <form id="form" novalidate>
+      <div class="field"><label for="fNombre">Nombre</label><input id="fNombre" name="nombre" autocomplete="name" required placeholder="Tu nombre"></div>
+      <div class="field"><label for="fTel">Teléfono o WhatsApp</label><input id="fTel" name="tel" type="tel" autocomplete="tel" required placeholder="669 123 4567"></div>
+      <div class="field"><label for="fTipo">¿Qué quieres proteger?</label>
+        <select id="fTipo" name="tipo"><option>Mi casa</option><option>Mi negocio u oficina</option><option>Un fraccionamiento o condominio</option></select></div>
+      <div class="field"><label for="fCol">Colonia</label><input id="fCol" name="colonia" placeholder="Ej. Centro, Cerritos, Villa Galaxia"></div>
+      <div class="field full"><label for="fMsg">Cuéntanos un poco más</label><textarea id="fMsg" name="mensaje" placeholder="Cuántas entradas tiene, qué áreas quieres vigilar…"></textarea></div>
+      <button class="btn btn-primary" type="submit">Enviar solicitud</button>
+      <div class="ok" id="ok" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- PANEL DE PEDIDOS (uso interno) -->
+<section id="panel" class="pv" hidden>
+  <div class="pv-head">
+    <div class="wrap">
+      <div class="pv-title">
+        <span class="eyebrow">FORTEX · Uso interno</span>
+        <h1>Pedidos e instalaciones</h1>
+        <p>Asigna cada compra a un técnico de Servicio técnico y sigue su estado hasta que quede instalada.</p>
+      </div>
+      <div class="pv-actions">
+        <span class="pn-mode" id="pnMode">Conectando…</span>
+        <button class="btn btn-ghost btn-sm" type="button" id="pnExAdd">Cargar ejemplos</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="pnExDel" hidden>Quitar ejemplos</button>
+        <a class="btn btn-primary btn-sm" href="#inicio" id="pnBack">Volver a la tienda</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap pv-body">
+    <p class="pn-note" id="pnNote" role="status" hidden></p>
+    <div class="pn-locked" id="pnLocked" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      <b>Solo el equipo de FORTEX ve los pedidos</b>
+      <p>Esta sección es para el dueño y los editores de la página. Si eres parte del equipo, pide acceso de edición.</p>
+    </div>
+    <div id="pnContent" hidden>
+      <div class="kpis" id="pnKpis"></div>
+      <div class="pv-grid">
+        <div class="pv-main">
+          <div class="pv-tools">
+            <div class="pchips" id="pnChips"></div>
+            <label class="search"><span class="sr">Buscar pedido</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg>
+              <input id="pnSearch" type="search" placeholder="Cliente, folio o colonia"></label>
+          </div>
+          <div class="tbl-wrap" id="pnTable">
+            <table class="tbl">
+              <thead><tr><th>Pedido</th><th>Cliente y dirección</th><th>Instalación</th><th class="num">Total y pago</th><th>Técnico</th><th>Estado</th></tr></thead>
+              <tbody id="pnRows"></tbody>
+            </table>
+          </div>
+          <div class="pn-empty" id="pnEmpty" hidden></div>
+        </div>
+        <aside class="pv-side">
+          <h3>Carga por técnico</h3>
+          <p class="side-sub">Servicio técnico · Instalación y mantenimiento</p>
+          <div id="pnTecs" class="tecs"></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="FORTEX">
+        <p>Monitoreo, vigilancia 24/7 y respaldo seguro para tu tranquilidad.</p>
+      </div>
+      <div><h4>Productos</h4><ul><li><a href="#productos">Cámara 1080p</a></li><li><a href="#productos">Cerradura biométrica</a></li><li><a href="#productos">Nube FORTEX</a></li><li><a href="#productos">Paquete FORTEX</a></li></ul></div>
+      <div><h4>Empresa</h4><ul><li><a href="#nosotros">Nosotros</a></li><li><a href="#tecnologia">Tecnología</a></li><li><a href="#faq">Preguntas frecuentes</a></li><li><a href="#panel">Panel de pedidos (equipo)</a></li></ul></div>
+      <div><h4>Contacto</h4><ul><li>#6012 Margarita Maza de Juárez</li><li>Mazatlán, Sinaloa</li><li><a href="#contacto">Solicitar cotización</a></li></ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 FORTEX Seguridad Inteligente, S.A. de C.V.</span>
+      <span>Aviso de privacidad · Términos y condiciones</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CARRITO -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+  <div class="drawer-head">
+    <h3 id="cartTitle">Tu carrito</h3>
+    <button class="x" type="button" id="cartClose" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
+
+<!-- CHECKOUT -->
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="ckTitle" hidden>
+  <div class="sheet">
+    <div class="sheet-main" id="ckMain"></div>
+    <aside class="sheet-side" id="ckSide"></aside>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  var fmt=function(n){return "$"+n.toLocaleString("es-MX")};
+  var st={cam:4,lock:1,cloud:true};
+  var $=function(id){return document.getElementById(id)};
+
+  /* ===== Almacén de pedidos: base de datos del artifact, o el navegador si no hay ===== */
+  var Store=(function(){
+    var ready=null;
+    function backend(){
+      if(ready) return ready;
+      ready=new Promise(function(res){
+        if(!window.claude||typeof window.claude.use!=="function"){res(null);return}
+        var done=false,to=setTimeout(function(){if(!done){done=true;res(null)}},10000);
+        Promise.all([window.claude.use("db"),window.claude.use("user")]).then(function(r){
+          if(done)return;done=true;clearTimeout(to);res(r[0]?{db:r[0],user:r[1]}:null);
+        },function(){if(!done){done=true;clearTimeout(to);res(null)}});
+      });
+      return ready;
+    }
+    function lsGet(k){try{var v=JSON.parse(localStorage.getItem(k)||"{}");return v&&typeof v==="object"?v:{}}catch(e){return {}}}
+    function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+    function saveOrder(order){
+      return backend().then(function(b){
+        if(!b){var all=lsGet("fortexPedidos");all[order.folio]=order;if(!lsSet("fortexPedidos",all))throw {code:"unavailable"};return}
+        return (b.user?b.user.id():Promise.resolve(null)).then(function(uid){
+          if(!uid) throw {code:"no_id"};
+          var ref=b.db.doc("pedidos/"+uid),patch={};patch[order.folio]=order;
+          return ref.get().then(function(s){return s.exists?ref.update({pedidos:patch}):ref.set({pedidos:patch})});
+        });
+      });
+    }
+    return {backend:backend,saveOrder:saveOrder,lsGet:lsGet,lsSet:lsSet};
+  })();
+
+  function camCost(n){
+    if(n<=0) return {sub:0,inst:0};
+    if(n<=3) return {sub:1100*n,inst:600};
+    return {sub:1000*n,inst:480};
+  }
+  function render(){
+    $("camN").textContent=st.cam; $("lockN").textContent=st.lock; $("cloud").checked=st.cloud;
+    $("camMinus").disabled=st.cam<=0; $("camPlus").disabled=st.cam>=8;
+    $("lockMinus").disabled=st.lock<=0; $("lockPlus").disabled=st.lock>=4;
+    var c=camCost(st.cam), lk=4200*st.lock, rows=[];
+    if(st.cam>0){
+      rows.push([st.cam+(st.cam===1?" cámara":" cámaras")+" × "+fmt(st.cam<=3?1100:1000),c.sub]);
+      rows.push(["Instalación de cámaras",c.inst]);
+    }
+    if(st.lock>0) rows.push([st.lock+(st.lock===1?" cerradura biométrica":" cerraduras biométricas"),lk]);
+    var total=c.sub+c.inst+lk;
+    $("lines").innerHTML=rows.length?rows.map(function(r){return '<div class="line"><span>'+r[0]+'</span><span>'+fmt(r[1])+'</span></div>'}).join(""):'<div class="line muted"><span>Agrega al menos un equipo</span></div>';
+    $("total").textContent=fmt(total);
+    $("monthly").textContent=st.cloud?"+ $380 al mes de nube":"Sin nube (grabación local)";
+    $("match").classList.toggle("show",st.cam===4&&st.lock===1);
+    $("sendQuote").setAttribute("aria-disabled",total===0?"true":"false");
+  }
+  $("camMinus").onclick=function(){st.cam=Math.max(0,st.cam-1);render()};
+  $("camPlus").onclick=function(){st.cam=Math.min(8,st.cam+1);render()};
+  $("lockMinus").onclick=function(){st.lock=Math.max(0,st.lock-1);render()};
+  $("lockPlus").onclick=function(){st.lock=Math.min(4,st.lock+1);render()};
+  $("cloud").onchange=function(e){st.cloud=e.target.checked;render()};
+  /* ================= TIENDA ================= */
+  var IMG={cam:document.querySelector('img[alt^="Cámara FORTEX"]').src,lock:document.querySelector('img[alt^="Cerradura biométrica"]').src,pack:document.querySelector('.brand img').src};
+  var LIM={cam:8,lock:4,pack:3};
+  var NAMES={cam:["Cámara FORTEX 1080p","Cámaras FORTEX 1080p"],lock:["Cerradura biométrica","Cerraduras biométricas"],pack:["Paquete FORTEX","Paquetes FORTEX"]};
+  var cart={cam:0,lock:0,pack:0,cloud:false};
+  try{var sv=JSON.parse(localStorage.getItem("fortexCart")||"null");if(sv&&typeof sv==="object")cart=Object.assign(cart,sv)}catch(e){}
+  function save(){try{localStorage.setItem("fortexCart",JSON.stringify(cart))}catch(e){}}
+
+  function calc(c){
+    var n=c.cam, unit=n<=3?1100:1000, inst=n===0?0:(n<=3?600:480);
+    var equip=unit*n+4200*c.lock+8680*c.pack;
+    return {unit:unit,inst:inst,equip:equip,total:equip+inst,monthly:c.cloud?380:0,devices:n+c.lock+c.pack};
+  }
+  function count(){return cart.cam+cart.lock+cart.pack+(cart.cloud?1:0)}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+
+  var toastT;
+  function toast(msg){var t=$("toast");t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2600)}
+
+  function updateBadge(bump){
+    var b=$("badge"),n=count();b.textContent=n;b.hidden=n===0;
+    if(bump){b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}
+  }
+
+  function add(k,qty){
+    qty=qty||1;
+    if(k==="cloud"){cart.cloud=true}
+    else{
+      var room=LIM[k]-cart[k];
+      if(room<=0){toast(k==="cam"?"Para más de 8 cámaras armamos un proyecto a la medida.":"Llegaste al máximo para compra en línea.");openCart();return}
+      cart[k]+=Math.min(room,qty);
+      if(qty>room) toast("Ajustamos la cantidad al máximo para compra en línea.");
+    }
+    save();updateBadge(true);renderCart();openCart();
+  }
+
+  function itemRow(k){
+    var c=calc(cart), q=cart[k], price=k==="cam"?c.unit*q:(k==="lock"?4200*q:8680*q);
+    var sub=k==="cam"?("$"+c.unit.toLocaleString("es-MX")+" c/u"+(q>=4?" · precio de 4 a 8":"")):(k==="lock"?"Instalación incluida":"4 cámaras + 1 acceso, instalado");
+    return '<div class="item"><div class="item-img'+(k==="pack"?" dark":"")+'"><img src="'+IMG[k]+'" alt=""></div>'+
+      '<div><div class="item-name">'+NAMES[k][q>1?1:0]+'</div><div class="item-sub">'+sub+'</div>'+
+      '<button class="remove" type="button" data-rm="'+k+'">Quitar</button></div>'+
+      '<div class="item-right"><span class="item-price">'+fmt(price)+'</span>'+
+      '<div class="mini"><button type="button" data-dec="'+k+'" aria-label="Quitar uno">−</button><span>'+q+'</span><button type="button" data-inc="'+k+'" aria-label="Agregar uno"'+(q>=LIM[k]?" disabled":"")+'>+</button></div></div></div>';
+  }
+
+  function totalsHTML(c){
+    var h='';
+    if(c.equip) h+='<div class="sum-line"><span>Equipos</span><span>'+fmt(c.equip)+'</span></div>';
+    if(cart.cam) h+='<div class="sum-line"><span>Instalación de cámaras</span><span>'+fmt(c.inst)+'</span></div>';
+    h+='<div class="sum-total"><span>Total</span><b>'+fmt(c.total)+'</b></div>';
+    h+='<div class="monthly" style="color:var(--azul)">'+(cart.cloud?"+ $380 al mes de Nube FORTEX, primer cobro al instalar":"Sin suscripción mensual")+'</div>';
+    return h;
+  }
+
+  function renderCart(){
+    var c=calc(cart), body=$("cartBody"), foot=$("cartFoot");
+    if(count()===0){
+      body.innerHTML='<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20.5" r="1.2"/><circle cx="17" cy="20.5" r="1.2"/></svg><b>Tu carrito está vacío</b><p>Agrega cámaras, cerraduras o el Paquete FORTEX para empezar.</p><a class="btn btn-dark btn-sm" href="#productos" data-close>Ver productos</a></div>';
+      foot.innerHTML='';foot.hidden=true;return;
+    }
+    foot.hidden=false;
+    var h='';["pack","cam","lock"].forEach(function(k){if(cart[k])h+=itemRow(k)});
+    h+='<div class="cloud-row"><div><b>Nube FORTEX</b><small>Respaldo y acceso desde tu celular · $380/mes</small></div><div class="switch"><input type="checkbox" id="cartCloud" aria-label="Agregar Nube FORTEX"'+(cart.cloud?" checked":"")+'><span></span></div></div>';
+    if(c.devices===0) h+='<p class="warn" style="margin-top:14px">La nube necesita al menos una cámara o cerradura. Agrega un equipo para continuar.</p>';
+    else if(cart.cam>0&&cart.cam<4) h+='<p class="note" style="margin-top:14px">Con '+(4-cart.cam)+' cámara'+(4-cart.cam>1?"s":"")+' más pagas $1,000 por cada una y $480 de instalación.</p>';
+    body.innerHTML=h;
+    foot.innerHTML=totalsHTML(c)+'<button class="btn btn-primary" type="button" id="toCheckout"'+(c.devices===0?" disabled":"")+'>Continuar al pago</button><p class="note">Instalación en Mazatlán incluida en el precio.</p>';
+  }
+
+  var lastFocus;
+  function openCart(){lastFocus=document.activeElement;$("scrim").hidden=false;$("drawer").hidden=false;document.body.style.overflow="hidden";setTimeout(function(){$("cartClose").focus()},50)}
+  function closeCart(){$("scrim").hidden=true;$("drawer").hidden=true;if($("checkout").hidden)document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+
+  $("cartBtn").onclick=function(){renderCart();openCart()};
+  $("cartClose").onclick=closeCart;
+  $("scrim").onclick=function(){closeCart()};
+  $("drawer").addEventListener("click",function(e){
+    var t=e.target.closest("button,a");if(!t)return;
+    var k;
+    if((k=t.getAttribute("data-inc"))){if(cart[k]<LIM[k])cart[k]++;else if(k==="cam")toast("Para más de 8 cámaras armamos un proyecto a la medida.")}
+    else if((k=t.getAttribute("data-dec"))){cart[k]=Math.max(0,cart[k]-1)}
+    else if((k=t.getAttribute("data-rm"))){cart[k]=0}
+    else if(t.hasAttribute("data-close")){closeCart();return}
+    else if(t.id==="toCheckout"){openCheckout();return}
+    else return;
+    save();updateBadge();renderCart();
+  });
+  $("drawer").addEventListener("change",function(e){if(e.target.id==="cartCloud"){cart.cloud=e.target.checked;save();updateBadge(true);renderCart()}});
+
+  document.querySelectorAll("[data-add]").forEach(function(b){
+    if(b.closest("#drawer"))return;
+    b.addEventListener("click",function(){add(b.getAttribute("data-add"))});
+  });
+  $("addQuote").addEventListener("click",function(){
+    if(st.cam+st.lock===0){toast("Agrega al menos una cámara o una cerradura.");return}
+    var roomC=LIM.cam-cart.cam, roomL=LIM.lock-cart.lock;
+    if(st.cam>roomC||st.lock>roomL) toast("Ajustamos la cantidad al máximo para compra en línea.");
+    cart.cam+=Math.min(st.cam,roomC);cart.lock+=Math.min(st.lock,roomL);if(st.cloud)cart.cloud=true;
+    save();updateBadge(true);renderCart();openCart();
+  });
+
+  /* ================= CHECKOUT ================= */
+  var ck={step:1,nombre:"",tel:"",correo:"",calle:"",colonia:"",fecha:"",turno:"",pago:"instalar"};
+  var DIAS=["dom","lun","mar","mié","jue","vie","sáb"],MESES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+  function nextDays(){var out=[],d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+2);while(out.length<10){if(d.getDay()!==0)out.push(new Date(d));d.setDate(d.getDate()+1)}return out}
+  function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+  function largo(isoS){var p=isoS.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);return d.toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"})}
+  var TURNOS={manana:"Mañana, de 9:00 a 13:00",tarde:"Tarde, de 14:00 a 18:00"};
+  var PAGOS={instalar:"Al instalar (efectivo o tarjeta en terminal)",transferencia:"Transferencia bancaria",sucursal:"En sucursal"};
+
+  function side(){
+    var c=calc(cart),h='<h3>Resumen del pedido</h3>';
+    ["pack","cam","lock"].forEach(function(k){if(cart[k]){var p=k==="cam"?c.unit*cart[k]:(k==="lock"?4200:8680)*cart[k];h+='<div class="sum-line"><span>'+cart[k]+' × '+NAMES[k][cart[k]>1?1:0]+'</span><span>'+fmt(p)+'</span></div>'}});
+    if(cart.cam) h+='<div class="sum-line"><span>Instalación de cámaras</span><span>'+fmt(c.inst)+'</span></div>';
+    h+='<div class="sum-total"><span>Total</span><b>'+fmt(c.total)+'</b></div>';
+    h+='<div class="monthly">'+(cart.cloud?"+ $380 al mes de Nube FORTEX":"Sin suscripción mensual")+'</div>';
+    $("ckSide").innerHTML=h;
+  }
+  function progress(){var s=["Tus datos","Instalación","Pago"];return '<ol class="progress" aria-label="Pasos">'+s.map(function(x,i){return '<li class="'+(i<ck.step?"on":"")+'"'+(i+1===ck.step?' aria-current="step"':'')+'>'+(i+1)+'. '+x+'</li>'}).join("")+'</ol>'}
+  function head(t){return '<div class="sheet-top"><h2 id="ckTitle" style="font-size:1.6rem">'+t+'</h2><button class="x" type="button" data-ck="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>'}
+  function fld(id,label,val,extra,full){return '<div class="field'+(full?" full":"")+'"><label for="'+id+'">'+label+'</label><input id="'+id+'" value="'+esc(val)+'" '+(extra||"")+'></div>'}
+
+  function renderCk(){
+    var m=$("ckMain"),h;
+    if(ck.step===1){
+      h=head("Tus datos")+progress()+'<div class="ck-form">'+
+        fld("ckNombre","Nombre completo",ck.nombre,'autocomplete="name"')+
+        fld("ckTel","Teléfono o WhatsApp",ck.tel,'type="tel" autocomplete="tel" placeholder="669 123 4567"')+
+        fld("ckCorreo","Correo (opcional)",ck.correo,'type="email" autocomplete="email"',true)+
+        fld("ckCalle","Calle y número",ck.calle,'autocomplete="address-line1"')+
+        fld("ckColonia","Colonia",ck.colonia,'placeholder="Ej. Centro, Cerritos, El Toreo"')+
+        '</div><p class="err" id="ckErr" hidden></p><div class="ck-actions"><button class="btn btn-line" type="button" data-ck="back">Volver al carrito</button><button class="btn btn-primary" type="button" data-ck="next">Elegir instalación</button></div>';
+    } else if(ck.step===2){
+      var days=nextDays();
+      if(!ck.fecha) ck.fecha=iso(days[0]);
+      h=head("Día de instalación")+progress()+
+        '<div style="display:grid;gap:10px"><span class="ck-label">Elige el día</span><div class="slots">'+days.map(function(d){var v=iso(d);return '<button type="button" class="slot" data-day="'+v+'" aria-pressed="'+(v===ck.fecha)+'"><small>'+DIAS[d.getDay()]+'</small><b>'+d.getDate()+'</b><small>'+MESES[d.getMonth()]+'</small></button>'}).join("")+'</div></div>'+
+        '<div style="display:grid;gap:10px"><span class="ck-label">Elige el horario</span><div class="opts">'+
+        Object.keys(TURNOS).map(function(k){return '<label class="opt"><input type="radio" name="turno" value="'+k+'"'+(ck.turno===k?" checked":"")+'><span><b>'+TURNOS[k].split(",")[0]+'</b><small>'+TURNOS[k].split(", ")[1]+'</small></span></label>'}).join("")+
+        '</div></div><p class="note" style="text-align:left">Instalamos de lunes a sábado. Nuestros técnicos llevan el equipo y dejan la app configurada en tu celular.</p><p class="err" id="ckErr" hidden></p>'+
+        '<div class="ck-actions"><button class="btn btn-line" type="button" data-ck="prev">Atrás</button><button class="btn btn-primary" type="button" data-ck="next">Ir al pago</button></div>';
+    } else if(ck.step===3){
+      h=head("Forma de pago")+progress()+'<div class="opts">'+
+        '<label class="opt"><input type="radio" name="pago" value="instalar"'+(ck.pago==="instalar"?" checked":"")+'><span><b>Pago al instalar</b><small>Pagas cuando el sistema ya funciona: efectivo o tarjeta en la terminal del técnico.</small></span></label>'+
+        '<label class="opt"><input type="radio" name="pago" value="transferencia"'+(ck.pago==="transferencia"?" checked":"")+'><span><b>Transferencia bancaria</b><small>Te mandamos los datos de la cuenta por WhatsApp para confirmar tu fecha.</small></span></label>'+
+        '<label class="opt"><input type="radio" name="pago" value="sucursal"'+(ck.pago==="sucursal"?" checked":"")+'><span><b>Pago en sucursal</b><small>#6012 Margarita Maza de Juárez, Mazatlán.</small></span></label>'+
+        '</div><ul class="done-list"><li><span>Instalación</span><span>'+largo(ck.fecha)+'<br>'+TURNOS[ck.turno]+'</span></li><li><span>Dirección</span><span>'+esc(ck.calle)+', '+esc(ck.colonia)+'</span></li></ul>'+
+        '<div class="ck-actions"><button class="btn btn-line" type="button" data-ck="prev">Atrás</button><button class="btn btn-primary" type="button" data-ck="confirm">Confirmar pedido · '+fmt(calc(cart).total)+'</button></div>';
+    } else {
+      h='<div class="done"><div class="done-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></div>'+
+        '<h2 id="ckTitle" style="font-size:1.7rem">¡Listo, '+esc(ck.nombre.split(" ")[0])+'! Tu pedido está confirmado</h2>'+
+        '<span class="order-no">Pedido '+ck.folio+'</span>'+
+        '<ul class="done-list"><li><span>Instalación</span><span>'+largo(ck.fecha)+'<br>'+TURNOS[ck.turno]+'</span></li><li><span>Dirección</span><span>'+esc(ck.calle)+', '+esc(ck.colonia)+'</span></li><li><span>Pago</span><span>'+PAGOS[ck.pago]+'</span></li><li><span>Total</span><span>'+fmt(ck.total)+(ck.cloud?" + $380/mes":"")+'</span></li></ul>'+
+        '<p style="color:var(--tinta-2)">Un día antes te escribimos al '+esc(ck.tel)+' para confirmar la hora exacta de llegada del técnico.</p>'+
+        '<button class="btn btn-primary" type="button" data-ck="finish">Seguir navegando</button></div>';
+    }
+    m.innerHTML=h; if(ck.step<4) side();
+    $("ckSide").hidden=ck.step===4;
+    var f=m.querySelector("input,button.slot");if(f)f.focus();
+  }
+
+  function readStep1(){
+    ck.nombre=$("ckNombre").value.trim();ck.tel=$("ckTel").value.trim();ck.correo=$("ckCorreo").value.trim();ck.calle=$("ckCalle").value.trim();ck.colonia=$("ckColonia").value.trim();
+    var miss=[];
+    [["ckNombre",ck.nombre,"tu nombre"],["ckTel",ck.tel.replace(/\D/g,"").length>=10?ck.tel:"","un teléfono de 10 dígitos"],["ckCalle",ck.calle,"la calle y número"],["ckColonia",ck.colonia,"la colonia"]].forEach(function(r){var bad=!r[1];$(r[0]).setAttribute("aria-invalid",bad);if(bad)miss.push(r[2])});
+    if(miss.length){var e=$("ckErr");e.textContent="Falta "+miss.join(", ")+".";e.hidden=false;$( ["ckNombre","ckTel","ckCalle","ckColonia"].filter(function(i){return $(i).getAttribute("aria-invalid")==="true"})[0]).focus();return false}
+    return true;
+  }
+
+  function openCheckout(){$("scrim").hidden=true;$("drawer").hidden=true;ck.step=1;$("checkout").hidden=false;document.body.style.overflow="hidden";renderCk()}
+  function closeCheckout(){$("checkout").hidden=true;document.body.style.overflow=""}
+
+  $("checkout").addEventListener("click",function(e){
+    if(e.target===$("checkout")){if(ck.step<4)closeCheckout();return}
+    var t=e.target.closest("button");if(!t)return;
+    var a=t.getAttribute("data-ck"),d=t.getAttribute("data-day");
+    if(d){ck.fecha=d;$("ckMain").querySelectorAll(".slot").forEach(function(s){s.setAttribute("aria-pressed",s===t)});return}
+    if(a==="close"){if(ck.step===4){a="finish"}else{closeCheckout();return}}
+    if(a==="back"){readStep1Silent();closeCheckout();renderCart();openCart();return}
+    if(a==="prev"){ck.step--;renderCk();return}
+    if(a==="next"){
+      if(ck.step===1&&!readStep1())return;
+      if(ck.step===2){var r=$("ckMain").querySelector('input[name="turno"]:checked');if(!r){var e2=$("ckErr");e2.textContent="Elige un horario para la instalación.";e2.hidden=false;return}ck.turno=r.value}
+      ck.step++;renderCk();return;
+    }
+    if(a==="confirm"){
+      if(t.disabled)return;
+      var p=$("ckMain").querySelector('input[name="pago"]:checked');ck.pago=p?p.value:"instalar";
+      if(!ck.folio) ck.folio="FTX-"+new Date().getFullYear()+"-"+String(Math.floor(1000+Math.random()*9000));
+      var c=calc(cart);
+      var order={folio:ck.folio,creado:new Date().toISOString(),nombre:ck.nombre,tel:ck.tel,correo:ck.correo,calle:ck.calle,colonia:ck.colonia,fecha:ck.fecha,turno:ck.turno,pago:ck.pago,items:{cam:cart.cam,lock:cart.lock,pack:cart.pack,cloud:cart.cloud},total:c.total,mensual:c.monthly};
+      var label=t.textContent;t.disabled=true;t.textContent="Registrando tu pedido…";
+      var oldErr=$("ckMain").querySelector(".err");if(oldErr)oldErr.remove();
+      Store.saveOrder(order).then(function(){
+        ck.total=c.total;ck.cloud=cart.cloud;ck.step=4;renderCk();ck.folio="";
+        cart={cam:0,lock:0,pack:0,cloud:false};save();updateBadge();
+      }).catch(function(err){
+        t.disabled=false;t.textContent=label;
+        var e=document.createElement("p");e.className="err";
+        e.textContent=(err&&["invalid_argument","not_granted","capability_disabled","no_id"].indexOf(err.code)>=0)?"Tu acceso a esta página es solo de lectura, así que no podemos registrar el pedido. Pide al dueño que te dé permiso para participar.":"No pudimos registrar tu pedido. Revisa tu conexión e intenta de nuevo.";
+        t.closest(".ck-actions").before(e);
+      });
+      return;
+    }
+    if(a==="finish"){closeCheckout();ck.step=1;renderCart();toast("Gracias por confiar en FORTEX.")}
+  });
+  function readStep1Silent(){if(ck.step===1&&$("ckNombre")){ck.nombre=$("ckNombre").value.trim();ck.tel=$("ckTel").value.trim();ck.correo=$("ckCorreo").value.trim();ck.calle=$("ckCalle").value.trim();ck.colonia=$("ckColonia").value.trim()}}
+  $("checkout").addEventListener("change",function(e){if(e.target.name==="turno"){ck.turno=e.target.value;var er=$("ckErr");if(er)er.hidden=true}if(e.target.name==="pago")ck.pago=e.target.value});
+
+  document.addEventListener("keydown",function(e){
+    if(e.key!=="Escape")return;
+    if(!$("checkout").hidden){if(ck.step<4)closeCheckout();else $("checkout").querySelector('[data-ck="finish"]').click()}
+    else if(!$("drawer").hidden) closeCart();
+  });
+  updateBadge();renderCart();
+
+  $("sendQuote").addEventListener("click",function(){
+    var parts=[];
+    if(st.cam) parts.push(st.cam+" cámara"+(st.cam>1?"s":""));
+    if(st.lock) parts.push(st.lock+" cerradura"+(st.lock>1?"s":""));
+    if(st.cloud) parts.push("nube");
+    $("fMsg").value="Me interesa: "+parts.join(", ")+". Total cotizado: "+$("total").textContent+".";
+  });
+  render();
+
+  // Menú móvil
+  var nav=$("nav"), mb=$("menuBtn");
+  mb.onclick=function(){var o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
+  document.querySelectorAll("#navLinks a").forEach(function(a){a.addEventListener("click",function(){nav.classList.remove("open");mb.setAttribute("aria-expanded","false")})});
+
+  // Reloj de la cámara
+  function tick(){var d=new Date();$("clock").textContent=d.toLocaleTimeString("es-MX",{hour12:false})}
+  tick(); setInterval(tick,1000);
+
+  // Formulario
+  $("form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=$("fNombre"), t=$("fTel"), ok=$("ok");
+    if(!n.value.trim()||!t.value.trim()){
+      ok.style.background="rgba(199,72,92,.15)";ok.style.borderColor="rgba(199,72,92,.6)";ok.style.color="#FFC9D1";
+      ok.textContent="Escribe tu nombre y un teléfono para poder contactarte.";ok.classList.add("show");
+      (n.value.trim()?t:n).focus();return;
+    }
+    ok.style.background="";ok.style.borderColor="";ok.style.color="";
+    ok.textContent="¡Gracias, "+n.value.trim().split(" ")[0]+"! Recibimos tu solicitud. Un asesor de FORTEX te llamará para agendar tu visita.";
+    ok.classList.add("show"); e.target.reset();
+  });
+
+  /* ================= PANEL DE PEDIDOS ================= */
+  var Panel=(function(){
+    var TECS=["Técnico 1","Técnico 2","Técnico 3","Técnico 4","Técnico 5","Técnico 6"];
+    var ESTADOS={por_asignar:"Por asignar",agendado:"Agendado",instalado:"Instalado",cancelado:"Cancelado"};
+    var started=false,mode=null,isAdmin=false,orders=[],asg={},filter="todos",q="";
+
+    function note(msg){var n=$("pnNote");n.textContent=msg;n.hidden=!msg}
+    function loadLocal(){
+      var p=Store.lsGet("fortexPedidos");
+      orders=Object.keys(p).map(function(f){var o=p[f];return Object.assign({},o,{_key:(o.ejemplo?"ejemplos":"local")+"__"+f})});
+      asg=Store.lsGet("fortexAsign");
+    }
+    function start(){
+      if(started)return;started=true;
+      note("Cargando pedidos…");
+      Store.backend().then(function(b){
+        if(!b){
+          mode="local";isAdmin=true;loadLocal();note("");render();
+          window.addEventListener("storage",function(e){if(e.key==="fortexPedidos"||e.key==="fortexAsign"){loadLocal();render()}});
+          return;
+        }
+        mode="online";
+        (b.user?b.user.canEdit():Promise.resolve(false)).then(function(ok){
+          isAdmin=!!ok;
+          if(!isAdmin){note("");render();return}
+          var timer=setTimeout(function(){note("Todavía no conectamos con la base de pedidos. Lo que ves puede no estar al día.")},10000);
+          b.db.collection("pedidos").onSnapshot(function(s){
+            if(!s.metadata.fromCache){clearTimeout(timer);note("")}
+            orders=[];
+            s.docs.forEach(function(d){var p=(d.data()||{}).pedidos||{};Object.keys(p).forEach(function(f){var o=p[f];if(o&&typeof o==="object")orders.push(Object.assign({},o,{_key:d.id+"__"+f}))})});
+            render();
+          },function(){clearTimeout(timer);note("Se perdió la conexión con la base de pedidos. Recarga la página para volver a intentarlo.")});
+          b.db.collection("asignaciones").onSnapshot(function(s){asg={};s.docs.forEach(function(d){asg[d.id]=d.data()||{}});render()},function(){});
+        });
+      });
+    }
+    function st(o){return Object.assign({estado:"por_asignar",tecnico:""},asg[o._key]||{})}
+
+    function setAsg(key,patch){
+      var cur=Object.assign({estado:"por_asignar",tecnico:""},asg[key]||{},patch);
+      if("tecnico" in patch){
+        if(patch.tecnico&&cur.estado==="por_asignar")cur.estado="agendado";
+        if(!patch.tecnico&&cur.estado==="agendado")cur.estado="por_asignar";
+      }
+      if(patch.estado==="agendado"&&!cur.tecnico){toast("Primero asigna un técnico.");render();return}
+      cur.actualizado=new Date().toISOString();
+      asg[key]=cur;render();
+      if(mode==="local"){var a=Store.lsGet("fortexAsign");a[key]=cur;Store.lsSet("fortexAsign",a);return}
+      Store.backend().then(function(b){return b.db.doc("asignaciones/"+key).set(cur)}).then(function(){toast("Cambio guardado.")}).catch(function(){toast("No se guardó el cambio. Intenta de nuevo.")});
+    }
+
+    function examples(){
+      var days=nextDays(),now=Date.now();
+      var raw=[
+        ["Familia Lizárraga","669 111 2041","Av. Rafael Buelna 2210","Lomas de Mazatlán",0,"manana","instalar",{cam:0,lock:0,pack:1,cloud:true}],
+        ["Abarrotes La Playita","669 122 3087","Calle Ángel Flores 415","Centro",0,"tarde","transferencia",{cam:6,lock:1,pack:0,cloud:true}],
+        ["Consultorio Dental Marina","669 133 4512","Av. Camarón Sábalo 1802","Zona Dorada",1,"manana","sucursal",{cam:2,lock:1,pack:0,cloud:false}],
+        ["Taller El Toreo","669 144 5236","Av. Insurgentes 980","El Toreo",2,"tarde","instalar",{cam:4,lock:0,pack:0,cloud:false}],
+        ["Familia Osuna","669 155 6748","Privada Las Gaviotas 33","Cerritos",3,"manana","instalar",{cam:0,lock:1,pack:1,cloud:true}],
+        ["Bodega Pacífico Norte","669 166 7390","Carretera Internacional km 3","Urías",4,"manana","transferencia",{cam:8,lock:2,pack:0,cloud:true}]
+      ];
+      var out={};
+      raw.forEach(function(r,i){
+        var c=calc(r[7]);var folio="FTX-"+new Date().getFullYear()+"-EJ"+(i+1);
+        out[folio]={folio:folio,ejemplo:true,creado:new Date(now-(i+1)*3600e3*5).toISOString(),nombre:r[0],tel:r[1],correo:"",calle:r[2],colonia:r[3],fecha:iso(days[r[4]]),turno:r[5],pago:r[6],items:r[7],total:c.total,mensual:c.monthly};
+      });
+      return out;
+    }
+    function loadExamples(){
+      var ex=examples();
+      if(mode==="local"){var p=Store.lsGet("fortexPedidos");Object.assign(p,ex);Store.lsSet("fortexPedidos",p);loadLocal();render();toast("Cargamos 6 pedidos de ejemplo.");return}
+      Store.backend().then(function(b){return b.db.doc("pedidos/ejemplos").set({pedidos:ex})}).then(function(){toast("Cargamos 6 pedidos de ejemplo.")}).catch(function(){toast("No pudimos cargar los ejemplos. Intenta de nuevo.")});
+    }
+    function clearExamples(){
+      var keys=orders.filter(function(o){return o.ejemplo}).map(function(o){return o._key});
+      if(mode==="local"){
+        var p=Store.lsGet("fortexPedidos"),a=Store.lsGet("fortexAsign");
+        Object.keys(p).forEach(function(f){if(p[f]&&p[f].ejemplo)delete p[f]});keys.forEach(function(k){delete a[k]});
+        Store.lsSet("fortexPedidos",p);Store.lsSet("fortexAsign",a);loadLocal();render();toast("Quitamos los pedidos de ejemplo.");return;
+      }
+      Store.backend().then(function(b){
+        return b.db.doc("pedidos/ejemplos").delete().then(function(){return Promise.all(keys.filter(function(k){return asg[k]}).map(function(k){return b.db.doc("asignaciones/"+k).delete()}))});
+      }).then(function(){toast("Quitamos los pedidos de ejemplo.")}).catch(function(){toast("No pudimos quitar los ejemplos. Intenta de nuevo.")});
+    }
+
+    function prods(it){
+      var p=[];if(it.pack)p.push(it.pack+" × Paquete");if(it.cam)p.push(it.cam+" × Cámara");if(it.lock)p.push(it.lock+" × Cerradura");if(it.cloud)p.push("Nube");
+      return p.join(" · ");
+    }
+    function shortDate(isoS){if(!isoS)return "—";var p=isoS.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);return DIAS[d.getDay()]+" "+d.getDate()+" "+MESES[d.getMonth()]}
+
+    function render(){
+      if(!started)return;
+      var locked=mode==="online"&&!isAdmin;
+      $("pnLocked").hidden=!locked;$("pnContent").hidden=locked||mode===null;
+      $("pnMode").textContent=mode==="local"?"Modo local · este navegador":"En línea";
+      $("pnMode").className="pn-mode "+(mode==="local"?"local":"online");
+      if(locked||mode===null)return;
+      var vivos=orders.filter(function(o){return st(o).estado!=="cancelado"});
+      var porAsignar=orders.filter(function(o){return st(o).estado==="por_asignar"}).length;
+      var ventas=vivos.reduce(function(s,o){return s+(+o.total||0)},0);
+      var nube=vivos.reduce(function(s,o){return s+(+o.mensual||0)},0);
+      $("pnKpis").innerHTML=
+        '<div class="kpi"><span>Pedidos activos</span><b>'+vivos.length+'</b></div>'+
+        '<div class="kpi'+(porAsignar?' alert-kpi':'')+'"><span>Por asignar</span><b>'+porAsignar+'</b></div>'+
+        '<div class="kpi"><span>Ventas en equipos</span><b>'+fmt(ventas)+'</b></div>'+
+        '<div class="kpi"><span>Nube, ingreso mensual</span><b>'+fmt(nube)+'</b></div>';
+      $("pnExDel").hidden=!orders.some(function(o){return o.ejemplo});
+
+      var counts={todos:orders.length};Object.keys(ESTADOS).forEach(function(k){counts[k]=0});
+      orders.forEach(function(o){counts[st(o).estado]++});
+      $("pnChips").innerHTML=["todos","por_asignar","agendado","instalado","cancelado"].map(function(k){return '<button type="button" class="pchip" data-f="'+k+'" aria-pressed="'+(filter===k)+'">'+(k==="todos"?"Todos":ESTADOS[k])+' <i>'+counts[k]+'</i></button>'}).join("");
+
+      var qq=q.trim().toLowerCase();
+      var list=orders.filter(function(o){
+        if(filter!=="todos"&&st(o).estado!==filter)return false;
+        if(qq&&[o.nombre,o.folio,o.colonia,o.tel].join(" ").toLowerCase().indexOf(qq)<0)return false;
+        return true;
+      }).sort(function(a,b){return (a.fecha||"").localeCompare(b.fecha||"")||(a.turno==="manana"?-1:1)-(b.turno==="manana"?-1:1)||(a.creado||"").localeCompare(b.creado||"")});
+
+      $("pnRows").innerHTML=list.map(function(o){
+        var s=st(o);
+        return '<tr class="st-'+s.estado+'">'+
+          '<td><span class="mono">'+esc(o.folio)+'</span>'+(o.ejemplo?' <span class="ex">Ejemplo</span>':'')+'<small>'+esc(prods(o.items||{}))+'</small></td>'+
+          '<td><b>'+esc(o.nombre)+'</b><small>'+esc(o.tel)+'</small><small>'+esc(o.calle)+', '+esc(o.colonia)+'</small></td>'+
+          '<td><b>'+shortDate(o.fecha)+'</b><small>'+(o.turno==="tarde"?"Tarde 14–18":"Mañana 9–13")+'</small></td>'+
+          '<td class="num">'+fmt(+o.total||0)+(o.mensual?'<small>+ '+fmt(o.mensual)+'/mes</small>':'')+'<small>'+esc((PAGOS[o.pago]||"").split(" (")[0])+'</small></td>'+
+          '<td><select data-key="'+esc(o._key)+'" data-fld="tecnico" aria-label="Técnico para '+esc(o.folio)+'"><option value="">Sin asignar</option>'+TECS.map(function(t){return '<option'+(s.tecnico===t?' selected':'')+'>'+t+'</option>'}).join("")+'</select></td>'+
+          '<td><select class="est est-'+s.estado+'" data-key="'+esc(o._key)+'" data-fld="estado" aria-label="Estado de '+esc(o.folio)+'">'+Object.keys(ESTADOS).map(function(k){return '<option value="'+k+'"'+(s.estado===k?' selected':'')+'>'+ESTADOS[k]+'</option>'}).join("")+'</select></td>'+
+        '</tr>';
+      }).join("");
+      var empty=$("pnEmpty");
+      if(!orders.length){empty.innerHTML='<b>Aún no hay pedidos</b><p>Cuando alguien compre en la tienda, su pedido aparece aquí con su día de instalación. Para probar el panel, haz una compra en la tienda o carga los pedidos de ejemplo.</p>';empty.hidden=false}
+      else if(!list.length){empty.innerHTML='<b>Ningún pedido coincide</b><p>Cambia el filtro o la búsqueda.</p>';empty.hidden=false}
+      else empty.hidden=true;
+      $("pnTable").hidden=!list.length;
+
+      var hoy=iso(new Date());
+      $("pnTecs").innerHTML=TECS.map(function(t){
+        var mine=orders.filter(function(o){var s=st(o);return s.tecnico===t&&s.estado==="agendado"}).sort(function(a,b){return (a.fecha||"").localeCompare(b.fecha||"")});
+        var next=mine.filter(function(o){return (o.fecha||"")>=hoy})[0];
+        var pct=Math.min(100,mine.length*20);
+        return '<div class="tec"><div class="tec-top"><b>'+t+'</b><span>'+mine.length+' agendad'+(mine.length===1?'a':'as')+'</span></div><div class="tec-bar"><i style="width:'+pct+'%"></i></div><small>'+(next?'Próxima: '+shortDate(next.fecha)+' · '+esc(next.colonia):'Disponible')+'</small></div>';
+      }).join("");
+    }
+
+    $("pnChips").addEventListener("click",function(e){var b=e.target.closest("[data-f]");if(b){filter=b.getAttribute("data-f");render()}});
+    $("pnSearch").addEventListener("input",function(e){q=e.target.value;render()});
+    $("pnRows").addEventListener("change",function(e){var s=e.target.closest("select[data-key]");if(!s)return;var p={};p[s.getAttribute("data-fld")]=s.value;setAsg(s.getAttribute("data-key"),p)});
+    $("pnExAdd").addEventListener("click",loadExamples);
+    $("pnExDel").addEventListener("click",clearExamples);
+    return {start:start};
+  })();
+
+  /* ================= PANTALLA COMPLETA ================= */
+  (function(){
+    var root=document.documentElement, btn=$("fsBtn");
+    var req=root.requestFullscreen||root.webkitRequestFullscreen;
+    var exit=document.exitFullscreen||document.webkitExitFullscreen;
+    var cur=function(){return document.fullscreenElement||document.webkitFullscreenElement};
+    var enabled=document.fullscreenEnabled!==undefined?document.fullscreenEnabled:document.webkitFullscreenEnabled;
+    if(!req||enabled===false)return;
+    btn.hidden=false;
+    function sync(){var on=!!cur();btn.classList.toggle("on",on);root.classList.toggle("is-fs",on);btn.setAttribute("aria-label",on?"Salir de pantalla completa (tecla F)":"Pantalla completa (tecla F)");btn.title=on?"Salir de pantalla completa (F o Esc)":"Pantalla completa (F)"}
+    function toggle(){
+      try{
+        var entering=!cur(), warned=false;
+        var warn=function(){if(!warned){warned=true;toast("Este navegador no dejó abrir la pantalla completa. Abre la página en su propia pestaña e inténtalo de nuevo.")}};
+        var p=entering?req.call(root):exit.call(document);
+        if(p&&p.catch)p.catch(warn);
+        if(entering)setTimeout(function(){if(!cur())warn()},1200);
+      }catch(e){toast("Este navegador no dejó abrir la pantalla completa.")}
+    }
+    btn.addEventListener("click",toggle);
+    document.addEventListener("fullscreenchange",sync);document.addEventListener("webkitfullscreenchange",sync);
+    document.addEventListener("keydown",function(e){
+      if((e.key==="f"||e.key==="F")&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+        var t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;
+        e.preventDefault();toggle();
+      }
+    });
+  })();
+
+  function route(){
+    var p=location.hash==="#panel";
+    document.querySelector("main").hidden=p;document.querySelector("footer").hidden=p;$("panel").hidden=!p;
+    if(p){Panel.start();window.scrollTo(0,0)}
+    else if(location.hash){var el=document.getElementById(location.hash.slice(1));if(el)setTimeout(function(){el.scrollIntoView()},0)}
+  }
+  window.addEventListener("hashchange",route);route();
+})();
+</script>
+
+</body>
+</html>
